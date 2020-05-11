@@ -1,4 +1,4 @@
-import ComposableArchitecture
+import Core
 
 extension Reducer {
   public func callAsFunction(

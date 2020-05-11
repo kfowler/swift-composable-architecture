@@ -11,7 +11,7 @@ extension CasePath {
   public static func `case`(_ embed: @escaping (Value) -> Root) -> CasePath {
     return self.init(
       embed: embed,
-      extract: { ComposableArchitecture.extract(case: embed, from: $0) }
+      extract: { Core.extract(case: embed, from: $0) }
       //      extract: { CasePaths.extract(case: embed, from: $0) }
     )
   }

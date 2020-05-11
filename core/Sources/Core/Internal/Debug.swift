@@ -168,7 +168,7 @@ extension Effect: CustomDebugOutputConvertible {
         let scheduler = mirror.children.first(where: { label, _ in label == "scheduler" })!.value
         let ns = Int("\(Mirror(reflecting: interval).children.first!.value)")!
         path.append(
-          "\n.delay(for: \(Double(ns) / Double(NSEC_PER_SEC)), scheduler: \(ComposableArchitecture.debugOutput(scheduler)))"
+          "\n.delay(for: \(Double(ns) / Double(NSEC_PER_SEC)), scheduler: \(Core.debugOutput(scheduler)))"
         )
       }
       if subjectType.hasPrefix("Empty<") {
@@ -190,7 +190,7 @@ extension Effect: CustomDebugOutputConvertible {
       }
       if subjectType.hasPrefix("ReceiveOn<") {
         let scheduler = mirror.children.first(where: { label, _ in label == "scheduler" })!.value
-        path.append("\n.receive(on: \(ComposableArchitecture.debugOutput(scheduler)))")
+        path.append("\n.receive(on: \(Core.debugOutput(scheduler)))")
       }
 
       mirror.children.forEach { _, v in updatePath(v) }
@@ -200,8 +200,8 @@ extension Effect: CustomDebugOutputConvertible {
 
     guard mergeMany.isEmpty else {
       return
-        ComposableArchitecture
-        .debugOutput(mergeMany.filter { !ComposableArchitecture.debugOutput($0).isEmpty })
+        Core
+        .debugOutput(mergeMany.filter { !Core.debugOutput($0).isEmpty })
     }
     guard empty == nil else { return "" }
 
@@ -215,7 +215,7 @@ extension Effect: CustomDebugOutputConvertible {
     let operators = path.reversed().joined()
     return """
       \(type(of: self))(\
-      \(just.map { "\n\("value: \(ComposableArchitecture.debugOutput($0))".indent(by: 2))\n" } ?? "")\
+      \(just.map { "\n\("value: \(Core.debugOutput($0))".indent(by: 2))\n" } ?? "")\
       )\(operators.indent(by: !operators.isEmpty && just == nil ? 2 : 0))
       """
   }

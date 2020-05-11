@@ -22,23 +22,28 @@ let package = Package(
       targets: ["ComposableArchitectureTestSupport"]
     ),
   ],
+  dependencies: [
+    .package(path: "./core/"),
+    .package(path: "./test-support/")
+  ],
   targets: [
     .target(
       name: "ComposableArchitecture",
       dependencies: [
+        "Core"
       ]
     ),
-    .testTarget(
-      name: "ComposableArchitectureTests",
-      dependencies: [
-        "ComposableArchitecture",
-        "ComposableArchitectureTestSupport",
-      ]
-    ),
+//    .testTarget(
+//      name: "ComposableArchitectureTests",
+//      dependencies: [
+//        "Core",
+//        "TestSupport",
+//      ]
+//    ),
     .target(
       name: "ComposableArchitectureTestSupport",
       dependencies: [
-        "ComposableArchitecture",
+        "TestSupport"
       ]
     ),
   ]

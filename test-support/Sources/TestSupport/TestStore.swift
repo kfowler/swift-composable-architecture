@@ -1,7 +1,7 @@
 import Combine
 import XCTest
 
-@testable import ComposableArchitecture
+@testable import Core
 
 /// A testable runtime for a reducer.
 ///
